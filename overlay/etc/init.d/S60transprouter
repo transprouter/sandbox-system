@@ -1,0 +1,17 @@
+#!/bin/bash
+
+case "$1" in
+
+  start)
+    echo "TODO start proxy"
+    ;;
+
+  stop)
+    echo "TODO stop proxy"
+    ;;
+
+  *)
+    echo "Usage: $0 {start|stop}"
+    exit 1
+
+esac

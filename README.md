@@ -12,3 +12,7 @@ Ligtweight system based on buildroot to run a sandbox.
 
     git submodule init
     git submodule update
+
+3. build images
+
+    ./make.sh
