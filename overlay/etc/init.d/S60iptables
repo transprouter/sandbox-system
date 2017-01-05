@@ -1,0 +1,19 @@
+#!/bin/bash
+
+case "$1" in
+
+  start)
+    echo "Starting iptables"
+    iptables -t nat -A OUTPUT -p tcp -m owner --uid-owner proxy -j REDIRECT --to-ports 3128
+    ;;
+
+  stop)
+    echo "Stopping iptables"
+    iptables -t nat -D OUTPUT -p tcp -m owner --uid-owner proxy -j REDIRECT --to-ports 3128
+    ;;
+
+  *)
+    echo "Usage: $0 {start|stop}"
+    exit 1
+
+esac
