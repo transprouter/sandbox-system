@@ -4,12 +4,12 @@ case "$1" in
 
   start)
     echo "Starting iptables"
-    iptables -t nat -A OUTPUT -p tcp -m owner --uid-owner proxy -j REDIRECT --to-ports 3128
+    iptables -t nat -A OUTPUT -p tcp -m owner --uid-owner proxied -j REDIRECT --to-ports 3128
     ;;
 
   stop)
     echo "Stopping iptables"
-    iptables -t nat -D OUTPUT -p tcp -m owner --uid-owner proxy -j REDIRECT --to-ports 3128
+    iptables -t nat -D OUTPUT -p tcp -m owner --uid-owner proxied -j REDIRECT --to-ports 3128
     ;;
 
   *)
