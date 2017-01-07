@@ -1,3 +1,3 @@
-transprouter -1 transprouter -1 = /opt/transprouter /bin/false - Transprouter drop priv user
+transprouter -1 transprouter -1 = /opt/transprouter /bin/bash - Transprouter drop priv user
 direct -1 users -1 = /home/direct /bin/bash - Direct network access user
 proxied -1 users -1 = /home/proxyied /bin/bash - Proxy filtered network access user
