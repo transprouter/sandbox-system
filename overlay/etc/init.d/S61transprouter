@@ -1,20 +1,5 @@
 #!/bin/bash
 
-case "$1" in
-
-  start)
-    echo "Starting transprouter update watcher"
-    su - transprouter -c "nohup /opt/transprouter-watcher.sh | logger -t transprouter-update-watcher"
-    echo $! > /var/run/transprouter-update-watcher.pid
-    ;;
-
-  stop)
-    echo "Stopping transprouter update watcher"
-    kill -9 $(cat /var/run/transprouter-update-watcher.pid)
-    ;;
-
-  *)
-    echo "Usage: $0 {start|stop}"
-    exit 1
-
-esac
+printf "Starting transprouter update watcher: "
+nohup su - transprouter -c /opt/transprouter/update-watcher.sh | logger -t transprouter &
+echo "OK"
