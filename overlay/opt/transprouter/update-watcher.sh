@@ -1,14 +1,17 @@
 #!/bin/bash
 
 touch /opt/transprouter/transprouter
-chmod +x /opt/transprouter/transprouter
+mkdir -p /opt/transprouter/current
 
 while true ; do
   inotifywait -e close_write /opt/transprouter/transprouter && {
     logger -t transprouter "update detected"
-    killall transprouter || killall -9 transprouter
+    logger -t transprouter "stopping version $(cd /opt/transprouter/current ; sha1sum transprouter)"
+    killall -9 transprouter
     logger -t transprouter "service stopped"
-    logger -t transprouter "starting version $(sha1sum /opt/transprouter/transprouter)"
-    nohup /opt/transprouter/transprouter | logger -t transprouter &
+    cp /opt/transprouter/transprouter /opt/transprouter/current/transprouter
+    chmod +x /opt/transprouter/current/transprouter
+    logger -t transprouter "starting version $(cd /opt/transprouter/current ; sha1sum transprouter)"
+    nohup /opt/transprouter/current/transprouter | logger -t transprouter &
   }
 done
